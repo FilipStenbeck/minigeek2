@@ -26,8 +26,8 @@
         <div class="container">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#/hotgames">Popular</a></li>
-                    <li><a href="#/foo">About</a></li>
+                    <li id="nav-hotgames" class="active"><a href="#/hotgames">Popular</a></li>
+                    <li id="nav-search"><a href="#/search">Search</a></li>
                     <li><a href="#/foobar/q123">Contact</a></li>
                 </ul>
                 <h3 class="text-muted">minigeek2</h3>
@@ -51,6 +51,18 @@
                         <div data-bind="click: showGame" class ="btn btn-primary btn-lg btn-block">
                             <span data-bind="text: name"> 
                         </div>
+                    </div>
+                </div>
+                <div class="row marketing">
+                    <div id="search">
+                    <form> 
+                        <div class="col-md-6 col-lg-6 col-sm-10 col-xs-10">
+                                <input type="text" class="form-control" id="search-text" placeholder="Enter game name">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-2 col-xs-2">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                         </div>
+                         </form>
                     </div>
                 </div>
             </div>

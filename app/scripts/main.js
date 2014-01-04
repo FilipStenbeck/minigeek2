@@ -7,8 +7,10 @@ ko.applyBindings(app.currentGame, $('#gameinfo')[0]);
 
 var geekService = new app.service.GeekService();
 
-//setup crossroads
+//Setup eventlistners
+app.util.setupEventListners();
 
+//setup crossroads
 /***********************
 	Game Info
 ************************/
@@ -37,7 +39,6 @@ crossroads.addRoute('hotgames', function(id) {
 			gameItem.name(game.name);
 			return gameItem;
 		})
-
 		//add them to hotgame list
 		 var i = 0;
 		 _.each(gameList, function(game) {
@@ -48,6 +49,18 @@ crossroads.addRoute('hotgames', function(id) {
 	});
 	app.util.showHotGames();
 });
+
+/***********************
+	Search 
+************************/
+crossroads.addRoute('search', function() {
+	app.util.showSearch();
+});
+
+crossroads.addRoute('search/{query}', function(query) {
+	app.util.showSearch(query);
+});
+
 
 //ROUTER DEBUG LOG
 crossroads.routed.add(console.log, console); //log all routes
