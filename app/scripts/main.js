@@ -1,6 +1,8 @@
 var app = app || {} ;
 
 app.hotGames = ko.observableArray();
+app.searchResult = ko.observableArray();
+ko.applyBindings(app.searchResult, $('#search')[0]);
 ko.applyBindings(app.hotGames, $('#hotgames')[0]);
 app.currentGame = new app.models.GameInfo();
 ko.applyBindings(app.currentGame, $('#gameinfo')[0]);
@@ -59,6 +61,23 @@ crossroads.addRoute('search', function() {
 
 crossroads.addRoute('search/{query}', function(query) {
 	app.util.showSearch(query);
+	app.searchResult.removeAll();
+	geekService.search(query, function(result) {
+		//Make GameItems
+		var gameList = _.map(result, function(game) {
+			var gameItem = new app.models.GameItem();
+			gameItem.id(game.id);
+			gameItem.name(game.name);
+			return gameItem;
+		});
+		//add them to searchResult list
+		 var i = 0;
+		 _.each(gameList, function(game) {
+		 	if (game.name != '') {
+	 			app.searchResult.push(game);
+		 	}
+		 });		
+	});
 });
 
 

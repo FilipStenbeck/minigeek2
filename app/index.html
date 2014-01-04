@@ -53,17 +53,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="row marketing">
-                    <div id="search">
-                    <form> 
-                        <div class="col-md-6 col-lg-6 col-sm-10 col-xs-10">
+                <div id="search">
+                    <div class="row marketing">
+                        <form> 
+                            <div class="col-md-6 col-lg-6 col-sm-10 col-xs-10">
                                 <input type="text" class="form-control" id="search-text" placeholder="Enter game name">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-2 col-xs-2">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                         </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-2 col-xs-2">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
                          </form>
                     </div>
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                    <!-- Search result list -->
+                    <div id="result" data-bind="foreach: app.searchResult">
+                        <div data-bind="click: showGame" class ="btn btn-primary btn-lg btn-block">
+                            <span data-bind="text: name"> 
+                        </div>
+                    </div>
+                </div>
+
                 </div>
             </div>
 

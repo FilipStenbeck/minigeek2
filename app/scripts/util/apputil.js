@@ -14,6 +14,7 @@ app.util = {
 		$('#search').hide();
 	},
 	showSearch : function(query) {
+		$('#search').show();
 		$('#nav-search').addClass('active');
 		$('#nav-hotgames').removeClass('active');
 		$('#search input').val(query);
@@ -24,6 +25,6 @@ app.util = {
 		//Search form submit
 		$('#search form').submit(function() {
 			hasher.setHash('search/' + $('#search input').val());
-		});			
+		});
 	}
-}
+};

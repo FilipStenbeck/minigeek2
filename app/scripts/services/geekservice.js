@@ -10,6 +10,7 @@ app.service.GeekService = function() {
         
         //locally cached data
         hotList : [],
+        searchList : [],
         gameId : '',
         game : {},
         forumList : [],
@@ -33,6 +34,13 @@ app.service.GeekService = function() {
             	//keep a cache of latest response
              	that.hotList = data.result;
                 callback(that.hotList);
+            });
+        },
+        search : function (query, callback) {
+            var that = this;
+            $.get(that.ROOT_URL + 'search', {query :  query}).success(function (data) {
+                that.searchList = data.result;
+                callback(that.searchList);
             });
         },
 
