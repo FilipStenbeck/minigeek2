@@ -71,11 +71,11 @@ app.service.GeekService = function() {
                 callback(data.result);
             });
         },
-        getforumPosts : function (callback) {
+        getforumPosts : function (node, callback) {
             var that = this;
             that.prev_forumList = that.forumList;
             
-            $.get(this.ROOT_URL + 'forumlist', {node : that.selected_node, game : app.currentGame.id()}).success(function (data) {
+            $.get(this.ROOT_URL + 'forumlist', {node : node, game : app.currentGame.id()}).success(function (data) {
                  that.forumList = data.result;
                 callback(that.forumList);
             });

@@ -52,7 +52,7 @@ crossroads.addRoute('gameinfo/{id}/video', function(id) {
 
 crossroads.addRoute('gameinfo/{id}/forum', function(id) {
 	app.forumList.removeAll();
-	geekService.getforumPosts(function(posts) {
+	geekService.getforumPosts('root', function(posts) {
 		var postsList = _.map(posts, function(post) {
 			var forumItem = new app.models.ForumPost();
 			forumItem.title(post.title);

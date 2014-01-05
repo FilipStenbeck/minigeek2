@@ -15,7 +15,7 @@ app.models.ForumPost = function() {
 
             	//geekService.prev_forumHeader = $scope.forumHeader;
             	//$scope.forumHeader = '<i class="icon-arrow-up"></i>' + '<p> ' + title +  '</p>';
-           		geekService.getforumPosts(function(posts) {
+           		geekService.getforumPosts(geekService.selected_node, function(posts) {
 					var postsList = _.map(posts, function(post) {
 						var forumItem = new app.models.ForumPost();
 						forumItem.title(post.title);
