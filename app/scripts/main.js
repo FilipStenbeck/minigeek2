@@ -2,6 +2,7 @@ var app = app || {} ;
 
 app.hotGames = ko.observableArray();
 app.searchResult = ko.observableArray();
+app.videoList = ko.observableArray();
 ko.applyBindings(app.searchResult, $('#search')[0]);
 ko.applyBindings(app.hotGames, $('#hotgames')[0]);
 app.currentGame = new app.models.GameInfo();
@@ -26,6 +27,26 @@ crossroads.addRoute('gameinfo/{id}', function(id) {
 		app.currentGame.thumbnail(game.thumbnail);
 		app.currentGame.yearpublished(game.yearpublished);
 		app.util.showGameInfo();
+	});
+});
+
+crossroads.addRoute('gameinfo/{id}/video', function(id) {
+	app.videoList.removeAll();
+	geekService.getGameVideo(id, function(videos) {
+		console.table(videos);
+
+		var videoList = _.map(videos, function(video) {
+			var videoItem = new app.models.GameVideo();
+			videoItem.title(video.title);
+			videoItem.link(video.link);
+			return videoItem;
+		})
+		//add them to video list
+		 var i = 0;
+		 _.each(videoList, function(video) {
+	 		app.videoList.push(video);
+		 });
+		app.util.showGameVideo();
 	});
 });
 

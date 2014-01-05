@@ -10,6 +10,7 @@ app.service.GeekService = function() {
         
         //locally cached data
         hotList : [],
+        videoList : [],
         searchList : [],
         gameId : '',
         game : {},
@@ -46,7 +47,10 @@ app.service.GeekService = function() {
 
          getGameInfo : function (id, callback) {
             var that = this;
-            $.get(that.ROOT_URL + 'gameinfo', {id : id}).success(function (data) {
+
+            //a new game id, so we need to get new data from server
+            if (app.currentGame.id() !== id) {
+                $.get(that.ROOT_URL + 'gameinfo', {id : id}).success(function (data) {
                 //Clean the response
                 data.result[0].link = 'http://boardgamegeek.com/boardgame/' + id;
                 data.result[0].description =   data.result[0].description.replace(/&#10;/g, " ");
@@ -54,9 +58,17 @@ app.service.GeekService = function() {
                 data.result[0].description =   data.result[0].description.replace(/&ndash;/g, " ");
                 
                 //Keep a cashed list of game
-                that.game = data.result[0];
+                that.game = data.result[0]; 
                 callback(that.game);
-                
+                });    
+            } else {
+                callback(that.game);    
+            }
+        },
+        getGameVideo : function(id, callback) {
+            console.log(id);
+            $.get(this.ROOT_URL + 'videolist', {id : id}).success(function (data) {
+                callback(data.result);
             });
         }
 	}

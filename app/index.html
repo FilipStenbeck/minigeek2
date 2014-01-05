@@ -37,17 +37,34 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <!-- Game Info -->
                     <div id="gameinfo">
-                        <p><h3 class="text-muted" data-bind="text: name"></h3>
-                             <ul class="nav nav-pills">
-                                <li id="game-video"><a>Videos</a></li>
-                                <li id="game-info" class="active"><a >Information</a></li>
-                                <li id="game-forum"><a>Forum</a></li>
-                            </ul>
-                        </p>
-                        <img  data-bind="attr:{src: thumbnail}" /> 
-                        <div data-bind="text: description"></div>
-                            <p>Rating: <span data-bind="text: rating"></span></p>
-                            <p>Pubished: <span data-bind="text: yearpublished"></span></p>
+                      <p><h3 class="text-muted" data-bind="text: name"></h3>
+                                 <ul class="nav nav-pills">
+                                    <li id="game-video"><a>Videos</a></li>
+                                    <li id="game-info" class="active"><a >Information</a></li>
+                                    <li id="game-forum"><a>Forum</a></li>
+                                </ul>
+                            </p>
+                        <div id="main">
+                            <img  data-bind="attr:{src: thumbnail}" /> 
+                            <div data-bind="text: description"></div>
+                                <p>Rating: <span data-bind="text: rating"></span></p>
+                                <p>Pubished: <span data-bind="text: yearpublished"></span></p>
+                        </div>
+
+                        <div id ="video-list">
+                            <table  class="table table-bordered table-striped ">        
+                                <thead> 
+                                    <tr>
+                                        <th>Videos</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach: app.videoList"> 
+                                    <tr>
+                                        <td> <a data-bind="click: showVideo"><span data-bind="text: title"> </span></a></td>
+                                    </tr>
+                                </tbody> 
+                            </table>    
+                        </div>
                     </div>
             </div>
                 <div class="row marketing">
@@ -114,6 +131,7 @@
         <!-- build:js scripts/main.js -->
         <script src="scripts/models/gameitem.js"></script> 
         <script src="scripts/models/gameinfo.js"></script> 
+        <script src="scripts/models/gamevideo.js"></script>  
         <script src="scripts/services/geekservice.js"></script> 
         <script src="scripts/util/apputil.js"></script>         
         <script src="scripts/main.js"></script>
