@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>minigeek2</title>
+        <title>Mini-Geek</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -30,14 +30,20 @@
                     <li id="nav-search"><a href="#/search">Search</a></li>
                     <li><a href="#/foobar/q123">Contact</a></li>
                 </ul>
-                <h3 class="text-muted">minigeek2</h3>
+                <h3 class="text-muted">Mini-Geek</h3>
             </div>
            
             <div class="row marketing">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <!-- Game Info -->
                     <div id="gameinfo">
-                        <p><h3 class="text-muted" data-bind="text: name"></h3></p>
+                        <p><h3 class="text-muted" data-bind="text: name"></h3>
+                             <ul class="nav nav-pills">
+                                <li id="game-video"><a>Videos</a></li>
+                                <li id="game-info" class="active"><a >Information</a></li>
+                                <li id="game-forum"><a>Forum</a></li>
+                            </ul>
+                        </p>
                         <img  data-bind="attr:{src: thumbnail}" /> 
                         <div data-bind="text: description"></div>
                             <p>Rating: <span data-bind="text: rating"></span></p>
