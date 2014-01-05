@@ -12,7 +12,7 @@ app.models.ForumPost = function() {
         		app.forumList.removeAll();
             	geekService.prev_node = geekService.selected_node;
             	geekService.selected_node = this.id();
-
+            	app.util.updateForumHeader(this.title());
             	//geekService.prev_forumHeader = $scope.forumHeader;
             	//$scope.forumHeader = '<i class="icon-arrow-up"></i>' + '<p> ' + title +  '</p>';
            		geekService.getforumPosts(geekService.selected_node, function(posts) {

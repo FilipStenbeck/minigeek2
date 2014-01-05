@@ -48,6 +48,10 @@ app.util = {
 		$('#game-forum').addClass('active');	
 
 	},
+
+	updateForumHeader : function (text) {
+		$('#forum th').html(text);
+	},
 	setupEventListners : function() {
 		//Search form submit
 		$('#search form').submit(function() {
