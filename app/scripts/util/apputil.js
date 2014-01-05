@@ -12,13 +12,15 @@ app.util = {
 
 		$('#game-info').addClass('active');
 		$('#game-video').removeClass('active');
+		$('#game-forum').removeClass('active');
 		$('#gameinfo').show();
 		$('#gameinfo #main').show();
 		$('#video-list').hide();
+		$('#forum').hide();
 		$('#hotgames').hide();
 		$('#search').hide();
 	},
-	showSearch : function(query) {
+	showSearch : function (query) {
 		$('#search').show();
 		$('#nav-search').addClass('active');
 		$('#nav-hotgames').removeClass('active');
@@ -26,12 +28,25 @@ app.util = {
 		$('#gameinfo').hide();
 		$('#hotgames').hide();
 	},
-	showGameVideo : function() {
+	showGameVideo : function () {
 		$('#gameinfo').show();
 		$('#video-list').show();
+		$('#forum').hide();
+
 		$('#gameinfo #main').hide();
 		$('#game-info').removeClass('active');
+		$('#game-forum').removeClass('active');
 		$('#game-video').addClass('active');
+	},
+	showGameForum : function () {
+		$('#gameinfo').show();
+		$('#forum').show();
+		$('#video-list').hide();
+		$('#gameinfo #main').hide();
+		$('#game-info').removeClass('active');
+		$('#game-video').removeClass('active');
+		$('#game-forum').addClass('active');	
+
 	},
 	setupEventListners : function() {
 		//Search form submit
@@ -43,6 +58,9 @@ app.util = {
 		});
 		$('#game-info').click(function() {
 			hasher.setHash('gameinfo/' + app.currentGame.id());
+		});
+		$('#game-forum').click(function() {
+			hasher.setHash('gameinfo/' + app.currentGame.id() +'/forum');
 		});
 	}
 };

@@ -65,6 +65,21 @@
                                 </tbody> 
                             </table>    
                         </div>
+
+                         <div id ="forum">
+                            <table  class="table table-bordered table-striped ">        
+                                <thead> 
+                                    <tr>
+                                        <th>Forum</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach: app.forumList"> 
+                                    <tr>
+                                        <td data-bind="click: getNextForumPost"> <span data-bind="html: title"> </span></td>
+                                    </tr>
+                                </tbody> 
+                            </table>    
+                        </div>
                     </div>
             </div>
                 <div class="row marketing">
@@ -132,6 +147,7 @@
         <script src="scripts/models/gameitem.js"></script> 
         <script src="scripts/models/gameinfo.js"></script> 
         <script src="scripts/models/gamevideo.js"></script>  
+        <script src="scripts/models/forumpost.js"></script>   
         <script src="scripts/services/geekservice.js"></script> 
         <script src="scripts/util/apputil.js"></script>         
         <script src="scripts/main.js"></script>

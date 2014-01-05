@@ -47,15 +47,16 @@ app.service.GeekService = function() {
 
          getGameInfo : function (id, callback) {
             var that = this;
-
             //a new game id, so we need to get new data from server
             if (app.currentGame.id() !== id) {
                 $.get(that.ROOT_URL + 'gameinfo', {id : id}).success(function (data) {
                 //Clean the response
-                data.result[0].link = 'http://boardgamegeek.com/boardgame/' + id;
-                data.result[0].description =   data.result[0].description.replace(/&#10;/g, " ");
-                data.result[0].description =   data.result[0].description.replace(/&quot;/g, " ");
-                data.result[0].description =   data.result[0].description.replace(/&ndash;/g, " ");
+                if (data.result[0]) {
+                    data.result[0].link = 'http://boardgamegeek.com/boardgame/' + id;
+                    data.result[0].description =   data.result[0].description.replace(/&#10;/g, " ");
+                    data.result[0].description =   data.result[0].description.replace(/&quot;/g, " ");
+                    data.result[0].description =   data.result[0].description.replace(/&ndash;/g, " ");
+                }
                 
                 //Keep a cashed list of game
                 that.game = data.result[0]; 
@@ -66,10 +67,18 @@ app.service.GeekService = function() {
             }
         },
         getGameVideo : function(id, callback) {
-            console.log(id);
             $.get(this.ROOT_URL + 'videolist', {id : id}).success(function (data) {
                 callback(data.result);
             });
-        }
+        },
+        getforumPosts : function (callback) {
+            var that = this;
+            that.prev_forumList = that.forumList;
+            
+            $.get(this.ROOT_URL + 'forumlist', {node : that.selected_node, game : app.currentGame.id()}).success(function (data) {
+                 that.forumList = data.result;
+                callback(that.forumList);
+            });
+        }  
 	}
 }

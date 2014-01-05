@@ -3,6 +3,8 @@ var app = app || {} ;
 app.hotGames = ko.observableArray();
 app.searchResult = ko.observableArray();
 app.videoList = ko.observableArray();
+app.forumList = ko.observableArray();
+
 ko.applyBindings(app.searchResult, $('#search')[0]);
 ko.applyBindings(app.hotGames, $('#hotgames')[0]);
 app.currentGame = new app.models.GameInfo();
@@ -33,8 +35,6 @@ crossroads.addRoute('gameinfo/{id}', function(id) {
 crossroads.addRoute('gameinfo/{id}/video', function(id) {
 	app.videoList.removeAll();
 	geekService.getGameVideo(id, function(videos) {
-		console.table(videos);
-
 		var videoList = _.map(videos, function(video) {
 			var videoItem = new app.models.GameVideo();
 			videoItem.title(video.title);
@@ -48,6 +48,25 @@ crossroads.addRoute('gameinfo/{id}/video', function(id) {
 		 });
 		app.util.showGameVideo();
 	});
+});
+
+crossroads.addRoute('gameinfo/{id}/forum', function(id) {
+	app.forumList.removeAll();
+	geekService.getforumPosts(function(posts) {
+		var postsList = _.map(posts, function(post) {
+			var forumItem = new app.models.ForumPost();
+			forumItem.title(post.title);
+			forumItem.leaf(post.leaf);
+			forumItem.id(post.id);
+			return forumItem;
+		})
+		//add them to video list
+		 var i = 0;
+		 _.each(postsList, function(post) {
+	 		app.forumList.push(post);
+		 });
+		 app.util.showGameForum();
+	});		
 });
 
 /***********************
