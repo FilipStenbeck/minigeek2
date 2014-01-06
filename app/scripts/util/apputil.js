@@ -1,5 +1,37 @@
 var app = app || {} ;
 
+
+app.ListHandler = {
+	updateVideoList : function (videos) {
+		var videoList = _.map(videos, function(video) {
+			var videoItem = new app.models.GameVideo();
+			videoItem.title(video.title);
+			videoItem.link(video.link);
+			return videoItem;
+		})
+		//add them to video list
+		 var i = 0;
+		 _.each(videoList, function(video) {
+	 		app.videoList.push(video);
+		 });
+	},
+	updatePostList : function (posts) {
+		app.forumList.removeAll();
+		var postsList = _.map(posts, function(post) {
+			var forumItem = new app.models.ForumPost();
+			forumItem.title(post.title);
+			forumItem.leaf(post.leaf);
+			forumItem.id(post.id);
+			return forumItem;
+		})
+		//add them to forum list
+		 var i = 0;
+		 _.each(postsList, function(post) {
+	 		app.forumList.push(post);
+		 });
+	}
+};
+
 app.util = {
 	showHotGames : function() {
 		$('#nav-search').removeClass('active');
@@ -65,6 +97,10 @@ app.util = {
 		});
 		$('#game-forum').click(function() {
 			hasher.setHash('gameinfo/' + app.currentGame.id() +'/forum');
+		});
+		$('#forum table thead th').click(function() {
+			var forumHeader = new app.models.ForumPost();
+			forumHeader.getPrevForumPost();
 		});
 	}
 };

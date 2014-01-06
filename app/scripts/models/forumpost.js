@@ -8,29 +8,29 @@ app.models.ForumPost = function() {
 	    leaf : ko.observable(""),
 	    title : ko.observable(""),
 	    getNextForumPost : function () {
+	    	var that = this;
         	if (this.leaf() !== true) {
-        		app.forumList.removeAll();
+        		geekService.prev_forumHeader = $('#forum table thead th').html();
             	geekService.prev_node = geekService.selected_node;
             	geekService.selected_node = this.id();
             	app.util.updateForumHeader(this.title());
-            	//geekService.prev_forumHeader = $scope.forumHeader;
-            	//$scope.forumHeader = '<i class="icon-arrow-up"></i>' + '<p> ' + title +  '</p>';
            		geekService.getforumPosts(geekService.selected_node, function(posts) {
-					var postsList = _.map(posts, function(post) {
-						var forumItem = new app.models.ForumPost();
-						forumItem.title(post.title);
-						forumItem.leaf(post.leaf);
-						forumItem.id(post.id);
-						return forumItem;
-					})
-					//add them to video list
-				 	var i = 0;
-				 	_.each(postsList, function(post) {
-			 			app.forumList.push(post);
-				 	}); 
-				});		
+					app.ListHandler.updatePostList(posts);
+				});	
         	}
-        	
+        },
+        getPrevForumPost : function () {
+        	var that = this;
+        	if (app.forumList()[0].leaf() === false) {
+        		geekService.selected_node = 'root'
+        		geekService.prev_forumHeader = "Forum"	
+        	} else {
+        		geekService.selected_node = geekService.prev_node;
+        	}
+        	geekService.getforumPosts(geekService.selected_node, function(posts) {
+				app.ListHandler.updatePostList(posts);
+				app.util.updateForumHeader(geekService.prev_forumHeader);
+			});
         }
 	}
 }

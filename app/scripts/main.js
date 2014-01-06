@@ -16,9 +16,9 @@ var geekService = new app.service.GeekService();
 app.util.setupEventListners();
 
 //setup crossroads
-/***********************
-	Game Info
-************************/
+/*************************************************
+	Game Info, Video & Foprum
+*************************************************/
 crossroads.addRoute('gameinfo/{id}', function(id) {
 	geekService.getGameInfo(id, function(game) {
 		app.currentGame.id(id);
@@ -35,17 +35,7 @@ crossroads.addRoute('gameinfo/{id}', function(id) {
 crossroads.addRoute('gameinfo/{id}/video', function(id) {
 	app.videoList.removeAll();
 	geekService.getGameVideo(id, function(videos) {
-		var videoList = _.map(videos, function(video) {
-			var videoItem = new app.models.GameVideo();
-			videoItem.title(video.title);
-			videoItem.link(video.link);
-			return videoItem;
-		})
-		//add them to video list
-		 var i = 0;
-		 _.each(videoList, function(video) {
-	 		app.videoList.push(video);
-		 });
+		app.ListHandler.updateVideoList(videos);
 		app.util.showGameVideo();
 	});
 });
@@ -53,19 +43,8 @@ crossroads.addRoute('gameinfo/{id}/video', function(id) {
 crossroads.addRoute('gameinfo/{id}/forum', function(id) {
 	app.forumList.removeAll();
 	geekService.getforumPosts('root', function(posts) {
-		var postsList = _.map(posts, function(post) {
-			var forumItem = new app.models.ForumPost();
-			forumItem.title(post.title);
-			forumItem.leaf(post.leaf);
-			forumItem.id(post.id);
-			return forumItem;
-		})
-		//add them to video list
-		 var i = 0;
-		 _.each(postsList, function(post) {
-	 		app.forumList.push(post);
-		 });
-		 app.util.showGameForum();
+		app.ListHandler.updatePostList(posts);
+		app.util.showGameForum();
 	});		
 });
 
